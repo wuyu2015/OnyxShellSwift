@@ -7,9 +7,13 @@ extension OnyxCommand {
         return parser.command
     }
     
-    public func printUsage() {
+    @discardableResult
+    public func printUsage(withLeadingNewline: Bool = false) -> Bool {
         guard let usage = commandConfiguration?.usage else {
-            return
+            return false
+        }
+        if withLeadingNewline {
+            print()
         }
         // found usage
         var cmd: OnyxCommand? = self
@@ -29,26 +33,32 @@ extension OnyxCommand {
         for line in lines.dropFirst() {
             print(blankPrefix, line, separator: "")
         }
+        return true
     }
     
-    public func printHelpText() {
+    @discardableResult
+    public func printHelpText(withLeadingNewline leadingNewline: Bool = false) -> Bool {
         guard let helpText = commandConfiguration?.helpText else {
-            return
+            return false
+        }
+        if leadingNewline {
+            print()
         }
         // found helpText
         print(helpText)
+        return true
     }
     
-    public func printUsageAndHelpText() {
+    @discardableResult
+    public func printUsageAndHelpText(withLeadingNewline leadingNewline: Bool = false) -> Bool {
         if commandConfiguration?.usage == nil && commandConfiguration?.helpText == nil {
             if let parentCommand = parentCommand {
-                parentCommand.printUsageAndHelpText()
+                return parentCommand.printUsageAndHelpText(withLeadingNewline: leadingNewline)
             }
-            return
+            return false
         }
         // found usage or documentation
-        printUsage()
-        print()
-        printHelpText()
+        printHelpText(withLeadingNewline: printUsage(withLeadingNewline: leadingNewline))
+        return true
     }
 }

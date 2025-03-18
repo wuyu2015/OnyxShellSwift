@@ -34,9 +34,9 @@ extension OnyxCommand {
             cmd.handleParseError(error: error)
             return
         }
-        print(error.localizedDescription)
-        print()
-        printUsageAndHelpText()
+        let errorMsg = error.localizedDescription
+        print(errorMsg)
+        printUsageAndHelpText(withLeadingNewline: !errorMsg.isEmpty)
     }
     
     public func handleRunError(error: Error) {
