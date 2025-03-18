@@ -1,5 +1,4 @@
 import XCTest
-import XCTestDelayPrinter
 @testable import OnyxShell
 
 final class FlagTests: XCTestCase {

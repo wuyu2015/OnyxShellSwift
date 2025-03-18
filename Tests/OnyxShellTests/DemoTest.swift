@@ -1,5 +1,4 @@
 import XCTest
-import XCTestDelayPrinter
 import OnyxShell
 
 final class DemoTests: XCTestCase {
