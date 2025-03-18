@@ -1,6 +1,6 @@
 extension OnyxCommand {
     
-    public var root: OnyxCommand {
+    public var rootCommand: OnyxCommand {
         var cmd: OnyxCommand = self
         while true {
             if cmd.parentCommand == nil {
