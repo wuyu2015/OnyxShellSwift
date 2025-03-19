@@ -50,5 +50,7 @@ extension OnyxCommand {
         print(error.localizedDescription)
     }
     
-    public func run() throws {}
+    public func run() throws {
+        printUsageAndHelpText()
+    }
 }
