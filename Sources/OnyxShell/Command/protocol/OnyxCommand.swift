@@ -9,6 +9,8 @@ public protocol OnyxCommand {
     init()
     
     func handleParseError(error: Error)
+    func handleSetupError(error: Error)
     func handleRunError(error: Error)
+    mutating func setup() throws
     func run() throws
 }

@@ -46,9 +46,15 @@ extension OnyxCommand {
         printUsageAndHelpText()
     }
     
+    public func handleSetupError(error: Error) {
+        print(error.localizedDescription)
+    }
+    
     public func handleRunError(error: Error) {
         print(error.localizedDescription)
     }
+    
+    public mutating func setup() throws {}
     
     public func run() throws {
         printUsageAndHelpText()

@@ -21,6 +21,13 @@ extension Onyx {
                     if let defaultSubcommand = config.defaultSubcommand {
                         // parse command
                         try parseCommand(command: command, arguments: arguments)
+                        // setup
+                        do {
+                            try command.setup()
+                        } catch  {
+                            command.handleSetupError(error: error)
+                            exit(EXIT_FAILURE)
+                        }
                         // parse default subcommand
                         try parse(commandType: config.subcommands![defaultSubcommand]!, arguments: arguments, parentCommand: command)
                         return
@@ -34,6 +41,13 @@ extension Onyx {
                                 if let subcommandType = subcommands[argument] {
                                     // parse command
                                     try parseCommand(command: command, arguments: Array(arguments)[0..<index])
+                                    // setup
+                                    do {
+                                        try command.setup()
+                                    } catch  {
+                                        command.handleSetupError(error: error)
+                                        exit(EXIT_FAILURE)
+                                    }
                                     // parse subcommand
                                     try parse(commandType: subcommandType, arguments: arguments.dropFirst(index + 1), parentCommand: command)
                                     return
@@ -46,6 +60,13 @@ extension Onyx {
             }
             // parse command
             try parseCommand(command: command, arguments: arguments)
+            // setup
+            do {
+                try command.setup()
+            } catch  {
+                command.handleSetupError(error: error)
+                exit(EXIT_FAILURE)
+            }
         }
         
         mutating func parseCommand(command: OnyxCommand, arguments: ArraySlice<String>) throws {
