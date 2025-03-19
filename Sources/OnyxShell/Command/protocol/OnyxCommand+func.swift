@@ -1,15 +1,5 @@
 extension OnyxCommand {
     
-    public var rootCommand: OnyxCommand {
-        var cmd: OnyxCommand = self
-        while true {
-            if cmd.parentCommand == nil {
-                return cmd
-            }
-            cmd = cmd.parentCommand!
-        }
-    }
-    
     static func parse(arguments: [String]) throws -> OnyxCommand {
         precondition(!arguments.isEmpty, "arguments cannot be empty.")
         var parser = Onyx.ArgumentParser()

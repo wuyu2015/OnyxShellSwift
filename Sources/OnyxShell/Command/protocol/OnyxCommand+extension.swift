@@ -19,7 +19,17 @@ extension OnyxCommand {
             exit(EXIT_FAILURE)
         }
         
+        Onyx.commands.removeAll()
         let command = parser.command!
+        var cmd = command
+        while true {
+            Onyx.commands.insert(cmd, at: 0)
+            if cmd.parentCommand == nil {
+                break
+            }
+            cmd = cmd.parentCommand!
+        }
+        
         do {
             try command.run()
         } catch  {
