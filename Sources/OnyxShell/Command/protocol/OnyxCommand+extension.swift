@@ -30,10 +30,6 @@ extension OnyxCommand {
     }
     
     public func handleParseError(error: Error) {
-        if let cmd = parentCommand {
-            cmd.handleParseError(error: error)
-            return
-        }
         if !error.localizedDescription.isEmpty {
             print(error.localizedDescription)
         }
@@ -41,10 +37,6 @@ extension OnyxCommand {
     }
     
     public func handleRunError(error: Error) {
-        if let cmd = parentCommand {
-            cmd.handleRunError(error: error)
-            return
-        }
         print(error.localizedDescription)
     }
     
