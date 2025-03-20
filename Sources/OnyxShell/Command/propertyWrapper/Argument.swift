@@ -84,6 +84,18 @@ public struct Argument<T> {
         )
     }
     
+    public init(required: Bool) {
+        self.init(
+            wrappedValue: nil,
+            default: nil,
+            exclusivity: .exclusive,
+            abstract: nil,
+            discussion: nil,
+            ref: nil,
+            required: required
+        )
+    }
+    
     public init(
         wrappedValue: T? = nil,
         default defaultValue: T? = nil,
