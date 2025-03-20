@@ -2,12 +2,11 @@ import Foundation
 
 extension Onyx {
     public enum ArgumentParserError: LocalizedError {
-        case invalidArgumentDefaultValue(index: Int, reason: Error)
         case invalidArgumentValue(index: Int, value: String, reason: Error)
         case invalidFlagValue(flag: String, reason: Error)
         case invalidOptionDefaultValue(option: String, reason: Error)
         case invalidOptionValue(option: String, value: String, reason: Error)
-        case missingArgument(Int)
+        case missingArgument(Int?)
         case missingOption(String)
         case missingOptionValue(String)
         case missingValue(String)
@@ -18,11 +17,6 @@ extension Onyx {
         
         public var errorDescription: String? {
             switch self {
-            case .invalidArgumentDefaultValue(let index, let reason):
-                if let reason = reason as? LocalizedError, let s = reason.errorDescription {
-                    return "invalid argument default value at position: \(index)\n\(s)"
-                }
-                return "invalid argument default value at position: \(index)"
             case .invalidArgumentValue(let index, let value, let reason):
                 if let reason = reason as? LocalizedError, let s = reason.errorDescription {
                     return "Invalid Argument at position: \(index), value: '\(value)'\n\(s)"
@@ -46,7 +40,11 @@ extension Onyx {
             case .missingOptionValue(let s):
                 return "option \(s) requires a value"
             case .missingArgument(let index):
-                return "missing argument at position \(index)"
+                if let index = index {
+                    return "missing argument at position \(index + 1)"
+                } else {
+                    return "missing argument"
+                }
             case .missingOption(let s):
                 return "missing required option: \(s)"
             case .missingValue(let s):

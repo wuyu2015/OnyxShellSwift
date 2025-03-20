@@ -7,72 +7,72 @@ extension Onyx.ArgumentParser {
             if let v = arg.setDefaultIfNeeded(), let ref = arg.ref {
                 (values[ref]! as! Value<String>).setValueIfNeeded(v)
             }
-            guard arg.wrappedValue != nil else {
-                throw Onyx.InternalError.invalidArgumentDefaultValue
+            if arg.required && arg.wrappedValue == nil {
+                throw Onyx.ArgumentParserError.missingArgument(nil)
             }
         case is Argument<Int>:
             let arg = argument as! Argument<Int>
             if let v = arg.setDefaultIfNeeded(), let ref = arg.ref {
                 (values[ref]! as! Value<Int>).setValueIfNeeded(v)
             }
-            guard arg.wrappedValue != nil else {
-                throw Onyx.InternalError.invalidArgumentDefaultValue
+            if arg.required && arg.wrappedValue == nil {
+                throw Onyx.ArgumentParserError.missingArgument(nil)
             }
         case is Argument<Double>:
             let arg = argument as! Argument<Double>
             if let v = arg.setDefaultIfNeeded(), let ref = arg.ref {
                 (values[ref]! as! Value<Double>).setValueIfNeeded(v)
             }
-            guard arg.wrappedValue != nil else {
-                throw Onyx.InternalError.invalidArgumentDefaultValue
+            if arg.required && arg.wrappedValue == nil {
+                throw Onyx.ArgumentParserError.missingArgument(nil)
             }
         case is Argument<Bool>:
             let arg = argument as! Argument<Bool>
             if let v = arg.setDefaultIfNeeded(), let ref = arg.ref {
                 (values[ref]! as! Value<Bool>).setValueIfNeeded(v)
             }
-            guard arg.wrappedValue != nil else {
-                throw Onyx.InternalError.invalidArgumentDefaultValue
+            if arg.required && arg.wrappedValue == nil {
+                throw Onyx.ArgumentParserError.missingArgument(nil)
             }
         case is Argument<[String]>:
             let arg = argument as! Argument<[String]>
             if let v = arg.setDefaultIfNeeded(), let ref = arg.ref {
                 (values[ref]! as! Value<[String]>).setValueIfNeeded(v)
             }
-            guard arg.wrappedValue != nil else {
-                throw Onyx.InternalError.invalidArgumentDefaultValue
+            if arg.required && arg.wrappedValue == nil {
+                throw Onyx.ArgumentParserError.missingArgument(nil)
             }
         case is Argument<[Int]>:
             let arg = argument as! Argument<[Int]>
             if let v = arg.setDefaultIfNeeded(), let ref = arg.ref {
                 (values[ref]! as! Value<[Int]>).setValueIfNeeded(v)
             }
-            guard arg.wrappedValue != nil else {
-                throw Onyx.InternalError.invalidArgumentDefaultValue
+            if arg.required && arg.wrappedValue == nil {
+                throw Onyx.ArgumentParserError.missingArgument(nil)
             }
         case is Argument<[Double]>:
             let arg = argument as! Argument<[Double]>
             if let v = arg.setDefaultIfNeeded(), let ref = arg.ref {
                 (values[ref]! as! Value<[Double]>).setValueIfNeeded(v)
             }
-            guard arg.wrappedValue != nil else {
-                throw Onyx.InternalError.invalidArgumentDefaultValue
+            if arg.required && arg.wrappedValue == nil {
+                throw Onyx.ArgumentParserError.missingArgument(nil)
             }
         case is Argument<[Bool]>:
             let arg = argument as! Argument<[Bool]>
             if let v = arg.setDefaultIfNeeded(), let ref = arg.ref {
                 (values[ref]! as! Value<[Bool]>).setValueIfNeeded(v)
             }
-            guard arg.wrappedValue != nil else {
-                throw Onyx.InternalError.invalidArgumentDefaultValue
+            if arg.required && arg.wrappedValue == nil {
+                throw Onyx.ArgumentParserError.missingArgument(nil)
             }
         case is Argument<[String: String]>:
             let arg = argument as! Argument<[String: String]>
             if let v = arg.setDefaultIfNeeded(), let ref = arg.ref {
                 (values[ref]! as! Value<[String: String]>).setValueIfNeeded(v)
             }
-            guard arg.wrappedValue != nil else {
-                throw Onyx.InternalError.invalidArgumentDefaultValue
+            if arg.required && arg.wrappedValue == nil {
+                throw Onyx.ArgumentParserError.missingArgument(nil)
             }
         default:
             throw Onyx.InternalError.wrongType

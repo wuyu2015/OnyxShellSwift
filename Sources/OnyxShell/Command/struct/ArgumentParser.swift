@@ -343,7 +343,7 @@ extension Onyx {
                 do {
                     try setDefaultIfNeeded(argument: argument)
                 } catch {
-                    throw Onyx.ArgumentParserError.invalidArgumentDefaultValue(index: index, reason: error)
+                    throw Onyx.ArgumentParserError.missingArgument(index)
                 }
             }
         }

@@ -10,6 +10,7 @@ public struct Argument<T> {
     public let abstract: String?
     public let discussion: String?
     public let ref: String?
+    public let required: Bool
     
     public init(wrappedValue: T?) {
         self.init(
@@ -18,7 +19,8 @@ public struct Argument<T> {
             exclusivity: .exclusive,
             abstract: nil,
             discussion: nil,
-            ref: nil
+            ref: nil,
+            required: true
         )
     }
     
@@ -29,7 +31,8 @@ public struct Argument<T> {
             exclusivity: .exclusive,
             abstract: nil,
             discussion: nil,
-            ref: nil
+            ref: nil,
+            required: true
         )
     }
     
@@ -40,7 +43,8 @@ public struct Argument<T> {
             exclusivity: exclusivity,
             abstract: nil,
             discussion: nil,
-            ref: nil
+            ref: nil,
+            required: true
         )
     }
     
@@ -51,7 +55,8 @@ public struct Argument<T> {
             exclusivity: .exclusive,
             abstract: abstract,
             discussion: nil,
-            ref: nil
+            ref: nil,
+            required: true
         )
     }
     
@@ -62,7 +67,8 @@ public struct Argument<T> {
             exclusivity: .exclusive,
             abstract: abstract,
             discussion: discussion,
-            ref: nil
+            ref: nil,
+            required: true
         )
     }
     
@@ -73,7 +79,8 @@ public struct Argument<T> {
             exclusivity: .exclusive,
             abstract: nil,
             discussion: nil,
-            ref: ref
+            ref: ref,
+            required: true
         )
     }
     
@@ -83,7 +90,8 @@ public struct Argument<T> {
         exclusivity: Onyx.ValueExclusivity = .exclusive,
         abstract: String? = nil,
         discussion: String? = nil,
-        ref: String? = nil
+        ref: String? = nil,
+        required: Bool = true
     ) {
         // abstract
         precondition(abstract == nil || !abstract!.isEmpty)
@@ -100,6 +108,7 @@ public struct Argument<T> {
         self.abstract = abstract
         self.discussion = discussion
         self.ref = ref
+        self.required = required
     }
     
     func parseValue(from rawValue: String) throws -> T? {
