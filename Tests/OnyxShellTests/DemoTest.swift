@@ -9,7 +9,7 @@ final class DemoTests: XCTestCase {
             let commandConfiguration: Onyx.CommandConfiguration? = .init(
                 name: "demo",
                 usage: """
-                    [-c | --Counter | -C | --no-counter]
+                    [-c | --counter | -C | --no-counter]
                     [--repeat=<count> | -n <count>]
                     [<name>]
                     """,
@@ -17,7 +17,7 @@ final class DemoTests: XCTestCase {
                     This is a demo command that demonstrates how to use OnyxShell to parse command-line arguments.
 
                     Arguments:
-                    -c, --Counter           Enable the counter feature. Each output will include an incrementing counter.
+                    -c, --counter           Enable the counter feature. Each output will include an incrementing counter.
                     -C, --no-counter        Disable the counter feature. Outputs will not include a counter.
 
                     --repeat=<count>,
@@ -36,11 +36,8 @@ final class DemoTests: XCTestCase {
             @Flag(false, ref: "useCounter", aliases: ["C"])
             var noCounter: Bool?
             
-            @Value(default: 3)
+            @Option(name: "repeat", shortName: "n", default: 3, required: true)
             var count: Int?
-            
-            @Option(ref: "count", name: "repeat", shortName: "n")
-            var repeatOption: Int?
             
             @Argument var name: String?
             

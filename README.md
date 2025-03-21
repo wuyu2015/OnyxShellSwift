@@ -18,7 +18,7 @@ struct DemoCommand: OnyxCommand {
     let commandConfiguration: Onyx.CommandConfiguration? = .init(
         name: "demo",
         usage: """
-            [-c | --Counter | -C | --no-counter]
+            [-c | --counter | -C | --no-counter]
             [--repeat=<count> | -n <count>]
             [<name>]
             """,
@@ -26,7 +26,7 @@ struct DemoCommand: OnyxCommand {
             这是一个演示命令，用于展示如何使用 OnyxShell 来解析命令行参数。
 
             参数：
-            -c, --Counter           启用计数器功能。每行输出将包含计数器。
+            -c, --counter           启用计数器功能。每行输出将包含计数器。
             -C, --no-counter        禁用计数器功能。输出将不包含计数器。
 
             --repeat=<count>，
@@ -45,11 +45,8 @@ struct DemoCommand: OnyxCommand {
     @Flag(false, ref: "useCounter", aliases: ["C"])
     var noCounter: Bool?
     
-    @Value(default: 3)
+    @Option(name: "repeat", shortName: "n", default: 3, required: true)
     var count: Int?
-    
-    @Option(ref: "count", name: "repeat", shortName: "n")
-    var repeatOption: Int?
     
     @Argument var name: String?
     
@@ -126,7 +123,7 @@ struct DemoCommand: OnyxCommand {
     let commandConfiguration: Onyx.CommandConfiguration? = .init(
         name: "demo",
         usage: """
-            [-c | --Counter | -C | --no-counter]
+            [-c | --counter | -C | --no-counter]
             [--repeat=<count> | -n <count>]
             [<name>]
             """,
@@ -134,7 +131,7 @@ struct DemoCommand: OnyxCommand {
             This is a demo command that demonstrates how to use OnyxShell to parse command-line arguments.
 
             Arguments:
-            -c, --Counter           Enable the counter feature. Each output will include an incrementing counter.
+            -c, --counter           Enable the counter feature. Each output will include an incrementing counter.
             -C, --no-counter        Disable the counter feature. Outputs will not include a counter.
 
             --repeat=<count>,
@@ -153,11 +150,8 @@ struct DemoCommand: OnyxCommand {
     @Flag(false, ref: "useCounter", aliases: ["C"])
     var noCounter: Bool?
     
-    @Value(default: 3)
+    @Option(name: "repeat", shortName: "n", default: 3, required: true)
     var count: Int?
-    
-    @Option(ref: "count", name: "repeat", shortName: "n")
-    var repeatOption: Int?
     
     @Argument var name: String?
     
