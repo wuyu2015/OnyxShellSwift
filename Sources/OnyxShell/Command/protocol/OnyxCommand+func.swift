@@ -26,12 +26,20 @@ extension OnyxCommand {
         }
         // prefix
         let prefix = names.isEmpty ? "usage: " : "usage: \(names.joined(separator: " ")) "
-        let blankPrefix = String(repeating: " ", count: prefix.count)
+        let prefixCount =  min(prefix.count, 24)
+        let blankPrefix = String(repeating: " ", count: prefixCount)
         // print
         let lines = usage.split(separator: "\n")
-        print(prefix, lines[0], separator: "")
-        for line in lines.dropFirst() {
-            print(blankPrefix, line, separator: "")
+        if prefixCount < 24 {
+            print(prefix, lines[0], separator: "")
+            for line in lines.dropFirst() {
+                print(blankPrefix, line, separator: "")
+            }
+        } else {
+            print(prefix)
+            for line in lines {
+                print(blankPrefix, line, separator: "")
+            }
         }
         return true
     }
