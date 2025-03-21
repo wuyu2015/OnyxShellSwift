@@ -31,9 +31,6 @@ final class OptionTests: XCTestCase {
             
             @Option(aliases: ["alias1", "alias2"])
             var s10: String?
-            
-            @Option(hidden: true)
-            var s11: String?
         }
         
         let demo = Demo()

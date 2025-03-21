@@ -31,9 +31,6 @@ final class FlagTests: XCTestCase {
             
             @Flag("flag", aliases: ["alias1", "alias2"])
             var s10: String?
-            
-            @Flag("flag", hidden: true)
-            var s11: String?
         }
         
         let demo = Demo()

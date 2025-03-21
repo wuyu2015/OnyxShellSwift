@@ -10,15 +10,12 @@ extension Onyx {
         public let subcommands: [String: OnyxCommand.Type]?
         public let defaultSubcommand: String?
         
-        public let hidden: Bool
-        
         public init(
             name: String? = nil,
             usage: String? = nil,
             helpText: String? = nil,
             subcommands: [String: OnyxCommand.Type]? = nil,
-            defaultSubcommand: String? = nil,
-            hidden: Bool = false
+            defaultSubcommand: String? = nil
         ) {
             precondition(name == nil || !(name!.isEmpty))
             precondition(name == nil || Onyx.Utils.Str.isValidName(name!))
@@ -41,7 +38,6 @@ extension Onyx {
             self.helpText = helpText
             self.subcommands = subcommands
             self.defaultSubcommand = defaultSubcommand
-            self.hidden = hidden
         }
     }
 }

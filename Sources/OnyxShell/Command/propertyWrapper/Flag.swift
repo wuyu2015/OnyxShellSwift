@@ -130,18 +130,6 @@ public struct Flag<T> {
         )
     }
     
-    public init(_ value: T, hidden: Bool) {
-        self.init(
-            wrappedValue: nil,
-            value,
-            exclusivity: .exclusive,
-            ref: nil,
-            name: nil,
-            shortName: nil,
-            aliases: nil
-        )
-    }
-    
     public init(
         wrappedValue: T? = nil,
         _ value: T,

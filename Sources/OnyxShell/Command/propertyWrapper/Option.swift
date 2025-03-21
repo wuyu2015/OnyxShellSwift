@@ -11,6 +11,7 @@ public struct Option<T> {
     public let name: String?
     public let shortName: String?
     public let aliases: [String]?
+    public let required: Bool
     
     public init(wrappedValue: T?) {
         self.init(
@@ -20,19 +21,8 @@ public struct Option<T> {
             name: nil,
             shortName: nil,
             aliases: nil,
-            default: nil
-        )
-    }
-    
-    public init(default defaultValue: T) {
-        self.init(
-            wrappedValue: nil,
-            exclusivity: .exclusive,
-            ref: nil,
-            name: nil,
-            shortName: nil,
-            aliases: nil,
-            default: defaultValue
+            default: nil,
+            required: false
         )
     }
     
@@ -44,7 +34,8 @@ public struct Option<T> {
             name: nil,
             shortName: nil,
             aliases: nil,
-            default: nil
+            default: nil,
+            required: false
         )
     }
     
@@ -56,7 +47,8 @@ public struct Option<T> {
             name: nil,
             shortName: nil,
             aliases: nil,
-            default: nil
+            default: nil,
+            required: false
         )
     }
     
@@ -68,7 +60,8 @@ public struct Option<T> {
             name: name,
             shortName: nil,
             aliases: nil,
-            default: nil
+            default: nil,
+            required: false
         )
     }
     
@@ -80,7 +73,8 @@ public struct Option<T> {
             name: nil,
             shortName: shortName,
             aliases: nil,
-            default: nil
+            default: nil,
+            required: false
         )
     }
     
@@ -92,11 +86,12 @@ public struct Option<T> {
             name: nil,
             shortName: nil,
             aliases: aliases,
-            default: nil
+            default: nil,
+            required: false
         )
     }
     
-    public init(hidden: Bool) {
+    public init(default defaultValue: T) {
         self.init(
             wrappedValue: nil,
             exclusivity: .exclusive,
@@ -104,7 +99,21 @@ public struct Option<T> {
             name: nil,
             shortName: nil,
             aliases: nil,
-            default: nil
+            default: defaultValue,
+            required: false
+        )
+    }
+    
+    public init(required: Bool) {
+        self.init(
+            wrappedValue: nil,
+            exclusivity: .exclusive,
+            ref: nil,
+            name: nil,
+            shortName: nil,
+            aliases: nil,
+            default: nil,
+            required: required
         )
     }
     
@@ -115,7 +124,8 @@ public struct Option<T> {
         name: String? = nil,
         shortName: String? = nil,
         aliases: [String]? = nil,
-        default defaultValue: T? = nil
+        default defaultValue: T? = nil,
+        required: Bool = false
     ) {
         // ref
         precondition(ref == nil || !ref!.isEmpty)
@@ -132,12 +142,16 @@ public struct Option<T> {
         precondition(aliases == nil || !aliases!.isEmpty)
         precondition(aliases == nil || aliases!.allSatisfy { !$0.isEmpty && Onyx.Utils.Str.isValidName($0) })
         
+        // require
+        precondition(required == false || defaultValue != nil)
+        
         self._wrappedValue = Value(wrappedValue: wrappedValue, default: defaultValue, exclusivity: exclusivity)
         
         self.ref = ref
         self.name = name
         self.shortName = shortName
         self.aliases = aliases
+        self.required = required
     }
     
     public func parseValue(from rawValue: String) throws -> T? {

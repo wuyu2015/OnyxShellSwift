@@ -59,72 +59,178 @@ extension Onyx.ArgumentParser {
             guard op.$wrappedValue.defaultValue != nil else {
                 throw Onyx.InternalError.invalidOptionDefaultValue
             }
-            if let v = op.setDefaultIfNeeded() {
-                op.$wrappedValue.setValueIfNeeded(v)
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<String>).setValue(v)
             }
         case is Option<Int>:
             let op = option as! Option<Int>
             guard op.$wrappedValue.defaultValue != nil else {
                 throw Onyx.InternalError.invalidOptionDefaultValue
             }
-            if let v = op.setDefaultIfNeeded() {
-                op.$wrappedValue.setValueIfNeeded(v)
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<Int>).setValue(v)
             }
         case is Option<Double>:
             let op = option as! Option<Double>
             guard op.$wrappedValue.defaultValue != nil else {
                 throw Onyx.InternalError.invalidOptionDefaultValue
             }
-            if let v = op.setDefaultIfNeeded() {
-                op.$wrappedValue.setValueIfNeeded(v)
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<Double>).setValue(v)
             }
         case is Option<Bool>:
             let op = option as! Option<Bool>
             guard op.$wrappedValue.defaultValue != nil else {
                 throw Onyx.InternalError.invalidOptionDefaultValue
             }
-            if let v = op.setDefaultIfNeeded() {
-                op.$wrappedValue.setValueIfNeeded(v)
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<Bool>).setValue(v)
             }
         case is Option<[String]>:
             let op = option as! Option<[String]>
             guard op.$wrappedValue.defaultValue != nil else {
                 throw Onyx.InternalError.invalidOptionDefaultValue
             }
-            if let v = op.setDefaultIfNeeded() {
-                op.$wrappedValue.setValueIfNeeded(v)
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<[String]>).setValue(v)
             }
         case is Option<[Int]>:
             let op = option as! Option<[Int]>
             guard op.$wrappedValue.defaultValue != nil else {
                 throw Onyx.InternalError.invalidOptionDefaultValue
             }
-            if let v = op.setDefaultIfNeeded() {
-                op.$wrappedValue.setValueIfNeeded(v)
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<[Int]>).setValue(v)
             }
         case is Option<[Double]>:
             let op = option as! Option<[Double]>
             guard op.$wrappedValue.defaultValue != nil else {
                 throw Onyx.InternalError.invalidOptionDefaultValue
             }
-            if let v = op.setDefaultIfNeeded() {
-                op.$wrappedValue.setValueIfNeeded(v)
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<[Double]>).setValue(v)
             }
         case is Option<[Bool]>:
             let op = option as! Option<[Bool]>
             guard op.$wrappedValue.defaultValue != nil else {
                 throw Onyx.InternalError.invalidOptionDefaultValue
             }
-            if let v = op.setDefaultIfNeeded() {
-                op.$wrappedValue.setValueIfNeeded(v)
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<[Bool]>).setValue(v)
             }
         case is Option<[String: String]>:
             let op = option as! Option<[String: String]>
             guard op.$wrappedValue.defaultValue != nil else {
                 throw Onyx.InternalError.invalidOptionDefaultValue
             }
-            if let v = op.setDefaultIfNeeded() {
-                op.$wrappedValue.setValueIfNeeded(v)
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<[String: String]>).setValue(v)
+            }
+        default:
+            throw Onyx.InternalError.wrongType
+        }
+    }
+    
+    func setDefaultIfRequired(option: Any) throws {
+        switch option.self {
+        case is Option<String>:
+            let op = option as! Option<String>
+            guard op.required else {
+                return
+            }
+            guard op.$wrappedValue.defaultValue != nil else {
+                throw Onyx.InternalError.invalidOptionDefaultValue
+            }
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<String>).setValue(v)
+            }
+        case is Option<Int>:
+            let op = option as! Option<Int>
+            guard op.required else {
+                return
+            }
+            guard op.$wrappedValue.defaultValue != nil else {
+                throw Onyx.InternalError.invalidOptionDefaultValue
+            }
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<Int>).setValue(v)
+            }
+        case is Option<Double>:
+            let op = option as! Option<Double>
+            guard op.required else {
+                return
+            }
+            guard op.$wrappedValue.defaultValue != nil else {
+                throw Onyx.InternalError.invalidOptionDefaultValue
+            }
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<Double>).setValue(v)
+            }
+        case is Option<Bool>:
+            let op = option as! Option<Bool>
+            guard op.required else {
+                return
+            }
+            guard op.$wrappedValue.defaultValue != nil else {
+                throw Onyx.InternalError.invalidOptionDefaultValue
+            }
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<Bool>).setValue(v)
+            }
+        case is Option<[String]>:
+            let op = option as! Option<[String]>
+            guard op.required else {
+                return
+            }
+            guard op.$wrappedValue.defaultValue != nil else {
+                throw Onyx.InternalError.invalidOptionDefaultValue
+            }
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<[String]>).setValue(v)
+            }
+        case is Option<[Int]>:
+            let op = option as! Option<[Int]>
+            guard op.required else {
+                return
+            }
+            guard op.$wrappedValue.defaultValue != nil else {
+                throw Onyx.InternalError.invalidOptionDefaultValue
+            }
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<[Int]>).setValue(v)
+            }
+        case is Option<[Double]>:
+            let op = option as! Option<[Double]>
+            guard op.required else {
+                return
+            }
+            guard op.$wrappedValue.defaultValue != nil else {
+                throw Onyx.InternalError.invalidOptionDefaultValue
+            }
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<[Double]>).setValue(v)
+            }
+        case is Option<[Bool]>:
+            let op = option as! Option<[Bool]>
+            guard op.required else {
+                return
+            }
+            guard op.$wrappedValue.defaultValue != nil else {
+                throw Onyx.InternalError.invalidOptionDefaultValue
+            }
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<[Bool]>).setValue(v)
+            }
+        case is Option<[String: String]>:
+            let op = option as! Option<[String: String]>
+            guard op.required else {
+                return
+            }
+            guard op.$wrappedValue.defaultValue != nil else {
+                throw Onyx.InternalError.invalidOptionDefaultValue
+            }
+            if let v = op.setDefaultIfNeeded(), let ref = op.ref {
+                try (values[ref]! as! Value<[String: String]>).setValue(v)
             }
         default:
             throw Onyx.InternalError.wrongType

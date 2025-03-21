@@ -332,13 +332,18 @@ extension Onyx {
                 currentOptionName = nil
                 hasEqualSign = false
             }
+            
+            // set default values for options
+            for (_, option) in options {
+                try setDefaultIfRequired(option: option)
+            }
 
             // set default values for values
             for (_, value) in values {
                 try valueSetDefaultIfNeeded(value: value)
             }
             
-            // set default values for values positionalArguments
+            // set default values for positionalArguments
             for (index, argument) in positionalArguments.enumerated() {
                 do {
                     try setDefaultIfNeeded(argument: argument)
