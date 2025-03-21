@@ -7,8 +7,6 @@ public struct Argument<T> {
         set { self = newValue }
     }
     
-    public let abstract: String?
-    public let discussion: String?
     public let ref: String?
     public let required: Bool
     
@@ -17,8 +15,6 @@ public struct Argument<T> {
             wrappedValue: wrappedValue,
             default: nil,
             exclusivity: .exclusive,
-            abstract: nil,
-            discussion: nil,
             ref: nil,
             required: true
         )
@@ -29,8 +25,6 @@ public struct Argument<T> {
             wrappedValue: nil,
             default: defaultValue,
             exclusivity: .exclusive,
-            abstract: nil,
-            discussion: nil,
             ref: nil,
             required: true
         )
@@ -41,32 +35,6 @@ public struct Argument<T> {
             wrappedValue: nil,
             default: nil,
             exclusivity: exclusivity,
-            abstract: nil,
-            discussion: nil,
-            ref: nil,
-            required: true
-        )
-    }
-    
-    public init(abstract: String) {
-        self.init(
-            wrappedValue: nil,
-            default: nil,
-            exclusivity: .exclusive,
-            abstract: abstract,
-            discussion: nil,
-            ref: nil,
-            required: true
-        )
-    }
-    
-    public init(abstract: String, discussion: String) {
-        self.init(
-            wrappedValue: nil,
-            default: nil,
-            exclusivity: .exclusive,
-            abstract: abstract,
-            discussion: discussion,
             ref: nil,
             required: true
         )
@@ -77,8 +45,6 @@ public struct Argument<T> {
             wrappedValue: nil,
             default: nil,
             exclusivity: .exclusive,
-            abstract: nil,
-            discussion: nil,
             ref: ref,
             required: true
         )
@@ -89,8 +55,6 @@ public struct Argument<T> {
             wrappedValue: nil,
             default: nil,
             exclusivity: .exclusive,
-            abstract: nil,
-            discussion: nil,
             ref: nil,
             required: required
         )
@@ -100,25 +64,15 @@ public struct Argument<T> {
         wrappedValue: T? = nil,
         default defaultValue: T? = nil,
         exclusivity: Onyx.ValueExclusivity = .exclusive,
-        abstract: String? = nil,
-        discussion: String? = nil,
         ref: String? = nil,
         required: Bool = true
     ) {
-        // abstract
-        precondition(abstract == nil || !abstract!.isEmpty)
-        
-        // discussion
-        precondition(discussion == nil || !discussion!.isEmpty)
-        
         // ref
         precondition(ref == nil || !ref!.isEmpty)
         precondition(ref == nil || Onyx.Utils.Str.isIdentifier(ref!))
         
         self._wrappedValue = Value(wrappedValue: wrappedValue, default: defaultValue, exclusivity: exclusivity)
         
-        self.abstract = abstract
-        self.discussion = discussion
         self.ref = ref
         self.required = required
     }

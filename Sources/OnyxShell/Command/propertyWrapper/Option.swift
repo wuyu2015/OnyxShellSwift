@@ -11,9 +11,6 @@ public struct Option<T> {
     public let name: String?
     public let shortName: String?
     public let aliases: [String]?
-    public let abstract: String?
-    public let discussion: String?
-    public let hidden: Bool
     
     public init(wrappedValue: T?) {
         self.init(
@@ -23,10 +20,7 @@ public struct Option<T> {
             name: nil,
             shortName: nil,
             aliases: nil,
-            default: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            default: nil
         )
     }
     
@@ -38,10 +32,7 @@ public struct Option<T> {
             name: nil,
             shortName: nil,
             aliases: nil,
-            default: defaultValue,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            default: defaultValue
         )
     }
     
@@ -53,40 +44,7 @@ public struct Option<T> {
             name: nil,
             shortName: nil,
             aliases: nil,
-            default: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
-        )
-    }
-    
-    public init(abstract: String) {
-        self.init(
-            wrappedValue: nil,
-            exclusivity: .exclusive,
-            ref: nil,
-            name: nil,
-            shortName: nil,
-            aliases: nil,
-            default: nil,
-            abstract: abstract,
-            discussion: nil,
-            hidden: false
-        )
-    }
-    
-    public init(abstract: String, discussion: String) {
-        self.init(
-            wrappedValue: nil,
-            exclusivity: .exclusive,
-            ref: nil,
-            name: nil,
-            shortName: nil,
-            aliases: nil,
-            default: nil,
-            abstract: abstract,
-            discussion: discussion,
-            hidden: false
+            default: nil
         )
     }
     
@@ -98,10 +56,7 @@ public struct Option<T> {
             name: nil,
             shortName: nil,
             aliases: nil,
-            default: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            default: nil
         )
     }
     
@@ -113,10 +68,7 @@ public struct Option<T> {
             name: name,
             shortName: nil,
             aliases: nil,
-            default: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            default: nil
         )
     }
     
@@ -128,10 +80,7 @@ public struct Option<T> {
             name: nil,
             shortName: shortName,
             aliases: nil,
-            default: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            default: nil
         )
     }
     
@@ -143,10 +92,7 @@ public struct Option<T> {
             name: nil,
             shortName: nil,
             aliases: aliases,
-            default: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            default: nil
         )
     }
     
@@ -158,10 +104,7 @@ public struct Option<T> {
             name: nil,
             shortName: nil,
             aliases: nil,
-            default: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: hidden
+            default: nil
         )
     }
     
@@ -172,10 +115,7 @@ public struct Option<T> {
         name: String? = nil,
         shortName: String? = nil,
         aliases: [String]? = nil,
-        default defaultValue: T? = nil,
-        abstract: String? = nil,
-        discussion: String? = nil,
-        hidden: Bool = false
+        default defaultValue: T? = nil
     ) {
         // ref
         precondition(ref == nil || !ref!.isEmpty)
@@ -192,21 +132,12 @@ public struct Option<T> {
         precondition(aliases == nil || !aliases!.isEmpty)
         precondition(aliases == nil || aliases!.allSatisfy { !$0.isEmpty && Onyx.Utils.Str.isValidName($0) })
         
-        // abstract
-        precondition(abstract == nil || !abstract!.isEmpty)
-        
-        // discussion
-        precondition(discussion == nil || !discussion!.isEmpty)
-        
         self._wrappedValue = Value(wrappedValue: wrappedValue, default: defaultValue, exclusivity: exclusivity)
         
         self.ref = ref
         self.name = name
         self.shortName = shortName
         self.aliases = aliases
-        self.abstract = abstract
-        self.discussion = discussion
-        self.hidden = hidden
     }
     
     public func parseValue(from rawValue: String) throws -> T? {

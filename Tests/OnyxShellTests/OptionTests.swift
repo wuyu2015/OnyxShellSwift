@@ -20,12 +20,6 @@ final class OptionTests: XCTestCase {
             @Option(exclusivity: .chooseFirst)
             var s4: String?
             
-            @Option(abstract: "abstract")
-            var s5: String?
-            
-            @Option(abstract: "abstract", discussion: "discussion")
-            var s6: String?
-            
             @Option(ref: "value1")
             var s7: String?
             
@@ -50,13 +44,9 @@ final class OptionTests: XCTestCase {
         XCTAssertEqual(demo.$s3.setDefaultIfNeeded(), "default string")
         XCTAssertEqual(demo.s3, "default string")
         XCTAssertEqual(demo.$s4.$wrappedValue.exclusivity, .chooseFirst)
-        XCTAssertEqual(demo.$s5.abstract, "abstract")
-        XCTAssertEqual(demo.$s6.abstract, "abstract")
-        XCTAssertEqual(demo.$s6.discussion, "discussion")
         XCTAssertEqual(demo.$s7.ref, "value1")
         XCTAssertEqual(demo.$s8.name, "name")
         XCTAssertEqual(demo.$s9.shortName, "n")
         XCTAssertEqual(demo.$s10.aliases, ["alias1", "alias2"])
-        XCTAssertEqual(demo.$s11.hidden, true)
     }
 }

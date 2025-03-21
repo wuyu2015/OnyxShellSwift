@@ -11,9 +11,6 @@ public struct Flag<T> {
     public let name: String?
     public let shortName: String?
     public let aliases: [String]?
-    public let abstract: String?
-    public let discussion: String?
-    public let hidden: Bool
     
     public init() {
         let value: T
@@ -45,10 +42,7 @@ public struct Flag<T> {
             ref: nil,
             name: nil,
             shortName: nil,
-            aliases: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            aliases: nil
         )
     }
     
@@ -60,10 +54,7 @@ public struct Flag<T> {
             ref: nil,
             name: nil,
             shortName: nil,
-            aliases: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            aliases: nil
         )
     }
     
@@ -75,10 +66,7 @@ public struct Flag<T> {
             ref: nil,
             name: nil,
             shortName: nil,
-            aliases: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            aliases: nil
         )
     }
     
@@ -90,40 +78,7 @@ public struct Flag<T> {
             ref: nil,
             name: nil,
             shortName: nil,
-            aliases: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
-        )
-    }
-    
-    public init(_ value: T, abstract: String) {
-        self.init(
-            wrappedValue: nil,
-            value,
-            exclusivity: .exclusive,
-            ref: nil,
-            name: nil,
-            shortName: nil,
-            aliases: nil,
-            abstract: abstract,
-            discussion: nil,
-            hidden: false
-        )
-    }
-    
-    public init(_ value: T, abstract: String, discussion: String) {
-        self.init(
-            wrappedValue: nil,
-            value,
-            exclusivity: .exclusive,
-            ref: nil,
-            name: nil,
-            shortName: nil,
-            aliases: nil,
-            abstract: abstract,
-            discussion: discussion,
-            hidden: false
+            aliases: nil
         )
     }
     
@@ -135,10 +90,7 @@ public struct Flag<T> {
             ref: ref,
             name: nil,
             shortName: nil,
-            aliases: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            aliases: nil
         )
     }
     
@@ -150,10 +102,7 @@ public struct Flag<T> {
             ref: nil,
             name: name,
             shortName: nil,
-            aliases: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            aliases: nil
         )
     }
     
@@ -165,10 +114,7 @@ public struct Flag<T> {
             ref: nil,
             name: nil,
             shortName: shortName,
-            aliases: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            aliases: nil
         )
     }
     
@@ -180,10 +126,7 @@ public struct Flag<T> {
             ref: nil,
             name: nil,
             shortName: nil,
-            aliases: aliases,
-            abstract: nil,
-            discussion: nil,
-            hidden: false
+            aliases: aliases
         )
     }
     
@@ -195,10 +138,7 @@ public struct Flag<T> {
             ref: nil,
             name: nil,
             shortName: nil,
-            aliases: nil,
-            abstract: nil,
-            discussion: nil,
-            hidden: hidden
+            aliases: nil
         )
     }
     
@@ -209,10 +149,7 @@ public struct Flag<T> {
         ref: String? = nil,
         name: String? = nil,
         shortName: String? = nil,
-        aliases: [String]? = nil,
-        abstract: String? = nil,
-        discussion: String? = nil,
-        hidden: Bool = false
+        aliases: [String]? = nil
     ) {
         // ref
         precondition(ref == nil || !ref!.isEmpty)
@@ -229,21 +166,12 @@ public struct Flag<T> {
         precondition(aliases == nil || !aliases!.isEmpty)
         precondition(aliases == nil || aliases!.allSatisfy { !$0.isEmpty && Onyx.Utils.Str.isValidName($0) })
         
-        // abstract
-        precondition(abstract == nil || !abstract!.isEmpty)
-        
-        // discussion
-        precondition(discussion == nil || !discussion!.isEmpty)
-        
         self._wrappedValue = Value(wrappedValue: wrappedValue, default: value, exclusivity: exclusivity)
         
         self.ref = ref
         self.name = name
         self.shortName = shortName
         self.aliases = aliases
-        self.abstract = abstract
-        self.discussion = discussion
-        self.hidden = hidden
     }
     
     func setValue() -> T? {

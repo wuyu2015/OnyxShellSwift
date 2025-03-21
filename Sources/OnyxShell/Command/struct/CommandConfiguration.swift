@@ -4,8 +4,6 @@ extension Onyx {
         public static let emptyConfiguration = Self()
         
         public let name: String?
-        public let abstract: String?
-        public let discussion: String?
         public let usage: String?
         public let helpText: String?
         
@@ -16,8 +14,6 @@ extension Onyx {
         
         public init(
             name: String? = nil,
-            abstract: String? = nil,
-            discussion: String? = nil,
             usage: String? = nil,
             helpText: String? = nil,
             subcommands: [String: OnyxCommand.Type]? = nil,
@@ -27,8 +23,6 @@ extension Onyx {
             precondition(name == nil || !(name!.isEmpty))
             precondition(name == nil || Onyx.Utils.Str.isValidName(name!))
             
-            precondition(abstract == nil || !(abstract!.isEmpty))
-            precondition(discussion == nil || !(discussion!.isEmpty))
             precondition(usage == nil || !(usage!.isEmpty))
             precondition(helpText == nil || !(helpText!.isEmpty))
             
@@ -43,8 +37,6 @@ extension Onyx {
             }
             
             self.name = name
-            self.abstract = abstract
-            self.discussion = discussion
             self.usage = usage
             self.helpText = helpText
             self.subcommands = subcommands

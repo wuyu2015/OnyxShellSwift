@@ -23,12 +23,6 @@ final class FlagTests: XCTestCase {
             @Flag("flag", exclusivity: .chooseFirst)
             var s4: String?
             
-            @Flag("flag", abstract: "abstract")
-            var s5: String?
-            
-            @Flag("flag", abstract: "abstract", discussion: "discussion")
-            var s6: String?
-            
             @Flag("flag", ref: "value1")
             var s7: String?
             
@@ -51,12 +45,8 @@ final class FlagTests: XCTestCase {
         XCTAssertEqual(demo.s2, "string")
         XCTAssertEqual(demo.$s2.$wrappedValue.defaultValue, "flag")
         XCTAssertEqual(demo.$s4.$wrappedValue.exclusivity, .chooseFirst)
-        XCTAssertEqual(demo.$s5.abstract, "abstract")
-        XCTAssertEqual(demo.$s6.abstract, "abstract")
-        XCTAssertEqual(demo.$s6.discussion, "discussion")
         XCTAssertEqual(demo.$s7.ref, "value1")
         XCTAssertEqual(demo.$s8.name, "name")
         XCTAssertEqual(demo.$s10.aliases, ["alias1", "alias2"])
-        XCTAssertEqual(demo.$s11.hidden, true)
     }
 }
